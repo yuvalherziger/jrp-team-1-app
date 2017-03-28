@@ -321,4 +321,4 @@ var initAuthorizationProcess = function() {
             });
         }
     });
-}
+};
