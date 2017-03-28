@@ -305,3 +305,20 @@ var getStudyUrls = function() {
     $$("#loading").hide();
     $$("#content").attr('style', 'display: block');
 };
+
+var initAuthorizationProcess = function() {
+    cordova.plugins.notification.local.hasPermission(function (granted) {
+        if (granted === true) {
+            console.log('1');
+        }
+        else {
+            cordova.plugins.notification.local.registerPermission(function (granted) {
+                if (granted === false) {
+                    console.log('2');
+                } else {
+                    console.log('3');
+                }
+            });
+        }
+    });
+}
