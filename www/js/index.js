@@ -256,11 +256,11 @@ var studyCompletionConfirmed = function(day) {
 var studyUrls = {
     day1: "https://unikoelnpsych.eu.qualtrics.com/jfe/form/SV_cAMr40YJFIe3hxX",
     day2: "https://unikoelnpsych.eu.qualtrics.com/jfe/form/SV_4UBP6WecP9VPa3b",
-    day3: "https://unikoelnpsych.eu.qualtrics.com/jfe/form/SV_4UBP6WecP9VPa3b",
-    day4: "https://unikoelnpsych.eu.qualtrics.com/jfe/form/SV_4UBP6WecP9VPa3b",
-    day5: "https://unikoelnpsych.eu.qualtrics.com/jfe/form/SV_4UBP6WecP9VPa3b",
-    day6: "https://unikoelnpsych.eu.qualtrics.com/jfe/form/SV_4UBP6WecP9VPa3b",
-    day7: "https://unikoelnpsych.eu.qualtrics.com/jfe/form/SV_4UBP6WecP9VPa3b",
+    day3: "https://unikoelnpsych.eu.qualtrics.com/jfe/form/SV_572nKcehQwuV3Zr",
+    day4: "https://unikoelnpsych.eu.qualtrics.com/jfe/form/SV_b8E22ZB0x9a8uiN",
+    day5: "https://unikoelnpsych.eu.qualtrics.com/jfe/form/SV_eK9hRscHUzV95NH",
+    day6: "https://unikoelnpsych.eu.qualtrics.com/jfe/form/SV_emaqE9Udm70Yn7T",
+    day7: "https://unikoelnpsych.eu.qualtrics.com/jfe/form/SV_25fZ2P2I9VAIjpH",
     day8: "https://unikoelnpsych.eu.qualtrics.com/jfe/form/SV_4UBP6WecP9VPa3b"
 };
 

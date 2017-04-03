@@ -157,6 +157,8 @@ Since emulating an Android device...
 ...I would strongly advise you to enable USB debugging on an Android device (provided that you posses one) and test the app on it. 
 Under [this link][usb-debuggin-android] you can discover how to enable USB debugging on your Android device.
 
+Next, you will need to make sure that
+
 After enabling USB debugging on your Android device and connecting it to your computer with a USB cable, you can simply run the following command to build the app:
 
 ```bash
