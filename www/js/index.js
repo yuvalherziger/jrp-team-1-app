@@ -1,26 +1,10 @@
 Number.prototype.padLeft = function(base, chr) {
-    var  len = (String(base || 10).length - String(this).length)+1;
-    return len > 0? new Array(len).join(chr || '0')+this : this;
+    var len = (String(base || 10).length - String(this).length) + 1;
+    return len > 0 ? new Array(len).join(chr || '0')+ this : this;
 };
 
 document.addEventListener('deviceready', function () {
-    var permissionGranted = false;
-
-    cordova.plugins.notification.local.hasPermission(function (granted) {
-        if (granted == true) {
-            permissionGranted = true;
-        }
-        else {
-            cordova.plugins.notification.local.registerPermission(function (granted) {
-                if (granted === false) {
-
-                } else {
-                    permissionGranted = true;
-                }
-            });
-        }
-    });
-
+    initAuth();
     try {
         initProgress();
     } catch(e) {
@@ -99,9 +83,6 @@ var render = function() {
         var confirmed = participantProgress.linksClicked[i].dateConfirmed !== null;
         var day = participantProgress.linksClicked[i].day;
 
-        console.log('day', day);
-        console.log('day - 1', day - 1);
-
         html = (day === 1 ? 'Intake' : 'Day ' + (day - 1));
         if (clicked === true && confirmed) {
             lastClicked = participantProgress.linksClicked[i].day;
@@ -118,8 +99,14 @@ var render = function() {
 
 var initLinkClickEvents = function() {
     $$(".dayLink").click(function() {
-        window.open($$(this).attr('data-link'), '_system');
-        console.log()
+        var currentLink = $$(this).attr('data-link');
+        try {
+            var inAppBrowserRef = cordova.InAppBrowser.open(currentLink, '_blank', 'location=yes');
+            inAppBrowserRef.addEventListener('exit', render);
+        } catch (e) {
+            window.open(currentLink, '_system');
+        }
+
     });
 };
 
@@ -164,7 +151,7 @@ var initProgress = function() {
             var clicked = localStorage.getItem("linkClickProgressDay" + i);
             var html = 'Day ' + i;
             if (clicked === 'true') {
-                 html += ' <img src="img/notification_done.png" style="height: 15px; vertical-align:text-top"/>';
+                html += ' <img src="img/notification_done.png" style="height: 15px; vertical-align:text-top"/>';
 
             }
             $$("#day" + i).html(html);
@@ -204,7 +191,7 @@ var linkClicked = function(day) {
             }
         }
         setParticipantProgress(participantProgress);
-        render();
+        //render();
     } catch (e) {
         console.debug(e.toString());
     }
@@ -295,30 +282,44 @@ var getStudyUrls = function() {
         url,
         data,
         function (data, status, xhr) {
-            console.log('got the data successfully');
             appendStudyUrls(data);
         },
         function (xhr, status) {
-            console.log('got error', xhr, status);
+            console.debug('got error', xhr, status);
             appendStudyUrls(studyUrls);
         });
     $$("#loading").hide();
     $$("#content").attr('style', 'display: block');
 };
 
-var initAuthorizationProcess = function() {
-    cordova.plugins.notification.local.hasPermission(function (granted) {
-        if (granted === true) {
-            console.log('1');
-        }
-        else {
-            cordova.plugins.notification.local.registerPermission(function (granted) {
-                if (granted === false) {
-                    console.log('2');
-                } else {
-                    console.log('3');
-                }
-            });
-        }
-    });
+var permissionCheckCallback = function(exists) {
+    if (!exists) {
+        setTimeout(triggerAuthorizationPrompt, 1000);
+    }
+};
+
+var triggerAuthorizationPrompt = function() {
+    var message = 'Welcome to the Excessive Consumption Study app! Important: this app needs your permission to send notifications.';
+    navigator.notification.alert(
+        message,
+        function() {
+            cordova.plugins.notification.local.registerPermission(permissionRegistrationCallback);
+        },
+        'Welcome',
+        'Confirm'
+    );
+};
+
+var permissionRegistrationCallback = function(granted) {
+    if (!granted) {
+        mainView.router.loadPage({
+            url: 'authorization.html',
+            ignoreCache: true,
+            reload: false
+        });
+    }
+};
+
+var initAuth = function() {
+    cordova.plugins.notification.local.hasPermission(permissionCheckCallback);
 };

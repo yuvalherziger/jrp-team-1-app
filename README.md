@@ -185,4 +185,6 @@ cordova emulate android
 
 [usb-debuggin-android]: https://www.kingoapp.com/root-tutorials/how-to-enable-usb-debugging-mode-on-android.htm
 [app-store-xcode]: https://itunes.apple.com/us/app/xcode/id497799835?mt=12
-[android-emulator-mac]: :https://facebook.github.io/react-native/releases/0.23/docs/android-setup.html
+[android-emulator-mac]: https://facebook.github.io/react-native/releases/0.23/docs/android-setup.html
+[java-runtime-mac]: https://www.java.com/en/download/mac_download.jsp
+[jdk]: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
