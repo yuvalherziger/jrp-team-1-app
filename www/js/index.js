@@ -209,7 +209,7 @@ var decrementStudyProgress = function() {
         participantProgress.lastStudy = lastStudy - 1;
         for (var i = 0; i < participantProgress.linksClicked.length; i++) {
             if (lastStudy === participantProgress.linksClicked[i].day) {
-                cancelNotification(i + 1);
+                cancelNotification(participantProgress.linksClicked[i].day);
                 participantProgress.linksClicked[i].dateClicked = null;
                 participantProgress.linksClicked[i].dateConfirmed = null;
                 participantProgress.linksClicked[i].clicked = false;
@@ -273,7 +273,7 @@ var studyUrls = {
     day5: "https://unikoelnpsych.eu.qualtrics.com/jfe/form/SV_eK9hRscHUzV95NH",
     day6: "https://unikoelnpsych.eu.qualtrics.com/jfe/form/SV_emaqE9Udm70Yn7T",
     day7: "https://unikoelnpsych.eu.qualtrics.com/jfe/form/SV_25fZ2P2I9VAIjpH",
-    day8: "https://unikoelnpsych.eu.qualtrics.com/jfe/form/SV_25fZ2P2I9VAIjpH"
+    day8: "https://unikoelnpsych.eu.qualtrics.com/jfe/form/SV_cTRdFzTGZLkePzf"
 };
 
 var appendStudyUrls = function(studyUrls) {
