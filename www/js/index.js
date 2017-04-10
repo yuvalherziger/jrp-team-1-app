@@ -209,6 +209,7 @@ var decrementStudyProgress = function() {
         participantProgress.lastStudy = lastStudy - 1;
         for (var i = 0; i < participantProgress.linksClicked.length; i++) {
             if (lastStudy === participantProgress.linksClicked[i].day) {
+                cancelNotification(i + 1);
                 participantProgress.linksClicked[i].dateClicked = null;
                 participantProgress.linksClicked[i].dateConfirmed = null;
                 participantProgress.linksClicked[i].clicked = false;
@@ -226,13 +227,19 @@ var formatDate = function(d) {
         [d.getHours().padLeft(), d.getMinutes().padLeft()].join(':');
 };
 
+var cancelNotification = function(day) {
+    try {
+        cordova.plugins.notification.local.cancel(day);
+    } catch (e) { }
+};
+
 var studyCompletionConfirmed = function(day) {
     try {
         if (typeof day === 'undefined' || day === null) {
             day = getParticipantProgress().lastStudy;
         }
         day = parseInt(day);
-        cordova.plugins.notification.local.cancel(day);
+        cancelNotification(day);
 
         var notificationTime = calculateNextNotificationTime();
         if (day < 8) {
