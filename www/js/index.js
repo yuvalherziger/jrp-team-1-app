@@ -336,3 +336,17 @@ var permissionRegistrationCallback = function(granted) {
 var initAuth = function() {
     cordova.plugins.notification.local.hasPermission(permissionCheckCallback);
 };
+
+var isAllowedToAccessStudy = function() {
+    var now = new Date();
+    var participantProgress = getParticipantProgress();
+    var i = participantProgress.linksClicked.length - 1;
+    var lastDateConfirmed = null;
+    do {
+        lastDateConfirmed = participantProgress.linksClicked[i].dateConfirmed;
+        i--;
+    } while (i >= 0 && lastDateConfirmed === null);
+    var then = new Date(lastDateConfirmed);
+    var nowAndThenDiffHours = Math.abs(now - then) / 36e5;
+    return nowAndThenDiffHours > 12;
+};
