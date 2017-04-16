@@ -185,6 +185,7 @@ If you have gone down the path of installing an Android emulator, the command to
 cordova emulate android
 ```
 
+
 [usb-debuggin-android]: https://www.kingoapp.com/root-tutorials/how-to-enable-usb-debugging-mode-on-android.htm
 [app-store-xcode]: https://itunes.apple.com/us/app/xcode/id497799835?mt=12
 [android-emulator-mac]: https://facebook.github.io/react-native/releases/0.23/docs/android-setup.html
