@@ -114,6 +114,7 @@ var initLinkClickEvents = function() {
                 window.open(currentLink, '_system');
             }
         }
+
     });
 };
 
@@ -198,7 +199,6 @@ var linkClicked = function(day) {
             }
         }
         setParticipantProgress(participantProgress);
-        return true;
     } catch (e) {
 
     }
