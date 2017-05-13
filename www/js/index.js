@@ -4,14 +4,24 @@ Number.prototype.padLeft = function(base, chr) {
 };
 
 document.addEventListener('deviceready', function () {
-    $$("#infoLink").click(function() {
-        var infoUrl = 'https://theconsumptionstudy.wixsite.com/info/information';
+    $$("#developerLink").click(function() {
+        var devUrl = 'https://www.github.com/yuvalherziger/';
         try {
-            cordova.InAppBrowser.open(infoUrl, '_blank', 'location=yes');
+            cordova.InAppBrowser.open(devUrl, '_blank', 'location=yes');
         } catch (e) {
-            window.open(infoUrl, '_system');
+            window.open(devUrl, '_system');
         }
     });
+
+    $$("#teamLink").click(function() {
+        var teamUrl = 'https://theconsumptionstudy.wixsite.com/info';
+        try {
+            cordova.InAppBrowser.open(teamUrl, '_blank', 'location=yes');
+        } catch (e) {
+            window.open(teamUrl, '_system');
+        }
+    });
+
     var appLaunchCount = window.localStorage.getItem('launchCount');
     try {
         if (typeof appLaunchCount === 'undefined' || appLaunchCount === null) {
@@ -295,7 +305,7 @@ var studyUrls = {
     day5: "https://unikoelnpsych.eu.qualtrics.com/jfe/form/SV_eK9hRscHUzV95NH",
     day6: "https://unikoelnpsych.eu.qualtrics.com/jfe/form/SV_emaqE9Udm70Yn7T",
     day7: "https://unikoelnpsych.eu.qualtrics.com/jfe/form/SV_25fZ2P2I9VAIjpH",
-    day8: "https://unikoelnpsych.eu.qualtrics.com/jfe/form/SV_cTRdFzTGZLkePzf"
+    day8: "https://unikoelnpsych.eu.qualtrics.com/jfe/form/SV_bPDx2YQyRwUuHBj"
 };
 
 var appendStudyUrls = function(studyUrls) {
@@ -308,8 +318,6 @@ var appendStudyUrls = function(studyUrls) {
 };
 
 var getStudyUrls = function() {
-    $$("#loading").attr('style', 'display: block');
-    $$("#content").hide();
     var url = "https://s3-eu-west-1.amazonaws.com/jrp-team-1-consumption/study-paths";
     var data = {};
     $$.getJSON(
@@ -322,8 +330,6 @@ var getStudyUrls = function() {
             console.debug('got error', xhr, status);
             appendStudyUrls(studyUrls);
         });
-    $$("#loading").hide();
-    $$("#content").attr('style', 'display: block');
 };
 
 var permissionCheckCallback = function(exists) {
