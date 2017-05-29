@@ -233,6 +233,16 @@ var scheduleNotification = function(notificationTime, day) {
     });
 };
 
+var verifyDecrementAction = function() {
+    var message = "Are you sure you'd like to mark this questionnaire incomplete?";
+    var confirmCallback = function(buttonIndex) {
+        if (buttonIndex === 2) {
+            decrementStudyProgress();
+        }
+    };
+    navigator.notification.confirm(message, confirmCallback, 'Mark Incomplete?', ['Cancel', 'OK']);
+};
+
 var decrementStudyProgress = function() {
     var participantProgress = getParticipantProgress();
     var lastStudy = participantProgress.lastStudy;
