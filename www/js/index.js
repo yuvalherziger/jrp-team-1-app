@@ -12,7 +12,10 @@ document.addEventListener('deviceready', function () {
             window.open(devUrl, '_system');
         }
     });
-
+    $$(".generalLink").click(function() {
+        var linkUrl = $$(this).attr('data-link');
+        openGeneralInAppBrowserLink(linkUrl);
+    });
     $$("#teamLink").click(function() {
         var teamUrl = 'https://theconsumptionstudy.wixsite.com/info';
         try {
@@ -416,4 +419,12 @@ var showMessage = function(message, callback, title, buttonText) {
         title,
         buttonText
     );
+};
+
+var openGeneralInAppBrowserLink = function(url) {
+    try {
+        cordova.InAppBrowser.open(url, '_blank', 'location=yes');
+    } catch (e) {
+        window.open(url, '_system');
+    }
 };
